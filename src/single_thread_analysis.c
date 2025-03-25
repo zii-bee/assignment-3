@@ -4,11 +4,13 @@
 
 double perform_single_threaded_analysis(int* array, int size) {
     struct timeval start, end;
+
+    // start timing immediately before computation
     gettimeofday(&start, NULL);
 
     // initialize single-threaded statistics
     long sum = 0, min = array[0], max = array[0], even_count = 0;
-
+    
     // single pass through the array (computation)
     for (int i = 0; i < size; i++) {
         int current = array[i];
@@ -18,11 +20,13 @@ double perform_single_threaded_analysis(int* array, int size) {
         even_count += (current % 2 == 0);
     }
 
+    // end timing immediately after computation
+    gettimeofday(&end, NULL);
+
     // calculate average
     double avg = (double)sum / size;
 
-    // end timing immediately after computation
-    gettimeofday(&end, NULL);
+    
     long seconds = end.tv_sec - start.tv_sec;
     long microseconds = end.tv_usec - start.tv_usec;
     double execution_time = seconds + microseconds * 1e-6;
