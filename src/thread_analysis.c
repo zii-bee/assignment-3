@@ -84,7 +84,7 @@ double perform_multithreaded_analysis(int* array, int size, int num_threads) {
     long microseconds = end.tv_usec - start.tv_usec;
     double execution_time = seconds + microseconds * 1e-6;
 
-    printf("Execution time (multithreaded): %.6f seconds\n", execution_time);
+    printf("Execution time (multithreaded): %.6f seconds\n\n", execution_time);
 
     // Clean up
     free(threads);
