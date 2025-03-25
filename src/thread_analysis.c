@@ -4,6 +4,7 @@
 #include <sys/time.h>
 #include <float.h>
 #include "thread_analysis.h"
+#include <limits.h>
 
 // Thread function for statistical analysis
 void* thread_function(void* args) {
@@ -13,7 +14,7 @@ void* thread_function(void* args) {
     // Initialize thread statistics
     stats->sum = 0;
     stats->min = INT_MAX;
-    stats->max = INT_MIN;
+    stats->max = 0;
     stats->even_count = 0;
 
     // Process assigned segment

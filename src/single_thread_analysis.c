@@ -11,7 +11,7 @@ double perform_single_threaded_analysis(int* array, int size) {
 
     // Initialize single-threaded statistics
     long long sum = 0;
-    int min = INT_MAX, max = INT_MIN, even_count = 0;
+    int min = INT_MAX, max = 0, even_count = 0;
 
     // Single pass through the array
     for (int i = 0; i < size; i++) {
