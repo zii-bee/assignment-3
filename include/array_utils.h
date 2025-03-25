@@ -1,10 +1,10 @@
 #ifndef ARRAY_UTILS_H
-#define __DEF
+#define ARRAY_UTILS_H
 
 #include <stdlib.h>
 
 // Struct to hold thread segment statistics
-typedef struct {
+typedef struct SegmentStats {
     int sum;
     int min;
     int max;
