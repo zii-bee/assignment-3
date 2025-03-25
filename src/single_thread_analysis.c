@@ -2,7 +2,7 @@
 #include <sys/time.h>
 #include "single_thread_analysis.h"
 
-void perform_single_threaded_analysis(int* array, int size) {
+double perform_single_threaded_analysis(int* array, int size) {
     struct timeval start, end;
     gettimeofday(&start, NULL);
 
@@ -21,16 +21,19 @@ void perform_single_threaded_analysis(int* array, int size) {
     // Calculate average
     double avg = (double)sum / size;
 
+    // Print Single-threaded Calculation Results header
+    printf("Single-threaded Calculation Results:\n");
+    printf("Overall average: %.2f\n", avg);
+    printf("Global minimum: %d\n", min);
+    printf("Global maximum: %d\n", max);
+    printf("Total count of even numbers: %d\n", even_count);
+
     gettimeofday(&end, NULL);
     long seconds = end.tv_sec - start.tv_sec;
     long microseconds = end.tv_usec - start.tv_usec;
     double execution_time = seconds + microseconds * 1e-6;
 
-    // Display single-threaded results
-    printf("\nSingle-threaded Analysis Results:\n");
-    printf("Average: %.2f\n", avg);
-    printf("Minimum: %d\n", min);
-    printf("Maximum: %d\n", max);
-    printf("Even Count: %d\n", even_count);
-    printf("Execution Time: %.6f seconds\n", execution_time);
+    printf("Execution time (single-threaded): %.6f seconds\n", execution_time);
+
+    return execution_time;
 }

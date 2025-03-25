@@ -13,6 +13,6 @@ typedef struct {
 } ThreadArgs;
 
 // Function to perform multithreaded statistical analysis
-void perform_multithreaded_analysis(int* array, int size, int num_threads);
+double perform_multithreaded_analysis(int* array, int size, int num_threads);
 
 #endif // THREAD_ANALYSIS_H

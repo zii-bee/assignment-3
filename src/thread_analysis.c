@@ -27,7 +27,7 @@ void* thread_function(void* args) {
     return NULL;
 }
 
-void perform_multithreaded_analysis(int* array, int size, int num_threads) {
+double perform_multithreaded_analysis(int* array, int size, int num_threads) {
     struct timeval start, end;
     gettimeofday(&start, NULL);
 
@@ -61,37 +61,46 @@ void perform_multithreaded_analysis(int* array, int size, int num_threads) {
     // Calculate global results
     int global_sum = 0, global_min = thread_stats[0].min, global_max = thread_stats[0].max, global_even_count = 0;
 
-    // Display thread-specific results
-    printf("Thread-Specific Results:\n");
+    // Print Multithreaded Calculation Results header
+    printf("Multithreaded Calculation Results:\n");
+
+    // Print segment results
+    printf("Segment Results:\n");
+    current_start = 0;
     for (int i = 0; i < num_threads; i++) {
-        printf("Thread %d: Sum=%d, Min=%d, Max=%d, Even Count=%d\n", 
-               i, thread_stats[i].sum, thread_stats[i].min, 
+        int current_segment = segment_size + (i < remainder ? 1 : 0);
+        printf("Thread %d (elements %d-%d): Sum: %d, Min: %d, Max: %d, Even count: %d\n", 
+               i+1, current_start, current_start + current_segment - 1,
+               thread_stats[i].sum, thread_stats[i].min, 
                thread_stats[i].max, thread_stats[i].even_count);
 
         global_sum += thread_stats[i].sum;
         global_min = (thread_stats[i].min < global_min) ? thread_stats[i].min : global_min;
         global_max = (thread_stats[i].max > global_max) ? thread_stats[i].max : global_max;
         global_even_count += thread_stats[i].even_count;
+        current_start += current_segment;
     }
 
     // Calculate global average
     double global_avg = (double)global_sum / size;
+
+    // Print global results
+    printf("Overall average: %.2f\n", global_avg);
+    printf("Global minimum: %d\n", global_min);
+    printf("Global maximum: %d\n", global_max);
+    printf("Total count of even numbers: %d\n", global_even_count);
 
     gettimeofday(&end, NULL);
     long seconds = end.tv_sec - start.tv_sec;
     long microseconds = end.tv_usec - start.tv_usec;
     double execution_time = seconds + microseconds * 1e-6;
 
-    // Display global results
-    printf("\nMulti-threaded Analysis Results:\n");
-    printf("Global Average: %.2f\n", global_avg);
-    printf("Global Minimum: %d\n", global_min);
-    printf("Global Maximum: %d\n", global_max);
-    printf("Total Even Count: %d\n", global_even_count);
-    printf("Execution Time: %.6f seconds\n", execution_time);
+    printf("Execution time (multithreaded): %.6f seconds\n", execution_time);
 
     // Clean up
     free(threads);
     free(thread_args);
     free(thread_stats);
+
+    return execution_time;
 }
