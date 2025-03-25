@@ -30,7 +30,7 @@ double perform_multithreaded_analysis(int* array, int size, int num_threads) {
     for (int i = 0; i < num_threads; i++) {
         int current_segment = segment_size + (i < remainder ? 1 : 0);
         int current_start = i * segment_size + (i < remainder ? i : remainder);
-
+        // Assign thread arguments
         thread_args[i].array = array;
         thread_args[i].start = current_start;
         thread_args[i].end = current_start + current_segment;
@@ -60,15 +60,16 @@ double perform_multithreaded_analysis(int* array, int size, int num_threads) {
     printf("Multithreaded Calculation Results:\n");
     printf("Segment Results:\n");
 
+    // Print segment results
     for (int i = 0; i < num_threads; i++) {
         printf("Thread %d (elements %d-%d): Sum: %lld, Min: %d, Max: %d, Even count: %d\n", 
                i+1, thread_args[i].start, thread_args[i].end - 1,
                (long long)thread_args[i].sum, thread_args[i].min, 
                thread_args[i].max, thread_args[i].even_count);
 
-        global_sum += thread_args[i].sum;
-        global_min = (thread_args[i].min < global_min) ? thread_args[i].min : global_min;
-        global_max = (thread_args[i].max > global_max) ? thread_args[i].max : global_max;
+        global_sum += thread_args[i].sum; // Aggregate sum
+        global_min = (thread_args[i].min < global_min) ? thread_args[i].min : global_min; // Update min
+        global_max = (thread_args[i].max > global_max) ? thread_args[i].max : global_max; // Update max
         global_even_count += thread_args[i].even_count;
     }
 
