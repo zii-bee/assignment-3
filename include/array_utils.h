@@ -5,7 +5,7 @@
 
 // Struct to hold thread segment statistics
 typedef struct SegmentStats {
-    int sum;
+    long long sum;
     int min;
     int max;
     int even_count;
