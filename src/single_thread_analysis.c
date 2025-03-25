@@ -7,7 +7,7 @@ double perform_single_threaded_analysis(int* array, int size) {
     gettimeofday(&start, NULL);
 
     // initialize single-threaded statistics
-    int sum = 0, min = array[0], max = array[0], even_count = 0;
+    long sum = 0, min = array[0], max = array[0], even_count = 0;
 
     // single pass through the array (computation)
     for (int i = 0; i < size; i++) {

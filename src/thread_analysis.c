@@ -60,7 +60,7 @@ double perform_multithreaded_analysis(int* array, int size, int num_threads) {
     }
 
     // Combine thread statistics
-    int global_sum = 0, global_min = thread_stats[0].min, global_max = thread_stats[0].max, global_even_count = 0;
+    long global_sum = 0, global_min = thread_stats[0].min, global_max = thread_stats[0].max, global_even_count = 0;
     // Allocate memory for segment starts and sizes
     int* seg_starts = malloc(num_threads * sizeof(int));
     int* seg_sizes = malloc(num_threads * sizeof(int));
@@ -78,12 +78,14 @@ double perform_multithreaded_analysis(int* array, int size, int num_threads) {
         global_even_count += thread_stats[i].even_count;
         current_start += current_segment;
     }
+    // Calculate global average
     double global_avg = (double)global_sum / size;
 
     // Stop timing after all threads have completed
     gettimeofday(&end, NULL);
     long seconds = end.tv_sec - start.tv_sec;
     long microseconds = end.tv_usec - start.tv_usec;
+    // Calculate execution time
     double execution_time = seconds + microseconds * 1e-6;
 
     // result printing
