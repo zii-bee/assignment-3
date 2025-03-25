@@ -30,9 +30,9 @@ double perform_single_threaded_analysis(int* array, int size) {
     // output single-threaded results
     printf("Single-threaded Calculation Results:\n");
     printf("Overall average: %.2f\n", avg);
-    printf("Global minimum: %d\n", min);
-    printf("Global maximum: %d\n", max);
-    printf("Total count of even numbers: %d\n", even_count);
+    printf("Global minimum: %ld\n", min);
+    printf("Global maximum: %ld\n", max);
+    printf("Total count of even numbers: %ld\n", even_count);
     printf("Execution time (single-threaded): %.6f seconds\n", execution_time);
 
     return execution_time;

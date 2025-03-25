@@ -98,9 +98,9 @@ double perform_multithreaded_analysis(int* array, int size, int num_threads) {
                thread_stats[i].max, thread_stats[i].even_count);
     }
     printf("Overall average: %.2f\n", global_avg);
-    printf("Global minimum: %d\n", global_min);
-    printf("Global maximum: %d\n", global_max);
-    printf("Total count of even numbers: %d\n", global_even_count);
+    printf("Global minimum: %ld\n", global_min);
+    printf("Global maximum: %ld\n", global_max);
+    printf("Total count of even numbers: %ld\n", global_even_count);
     printf("Execution time (multithreaded): %.6f seconds\n\n", execution_time);
 
     // Clean up
